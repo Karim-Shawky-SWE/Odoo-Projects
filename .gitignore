@@ -1,1 +1,23 @@
-/enterprise-pulse-ai-odoo
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Odoo logs
+*.log
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Keep independent project separate
+/enterprise-pulse-ai-odoo/
