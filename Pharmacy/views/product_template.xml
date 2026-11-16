@@ -1,0 +1,65 @@
+<odoo>
+    <record id="product_template_view_inherit" model="ir.ui.view">
+    <field name="name">product.template.inherit</field>
+    <field name="model">product.template</field>
+    <field name="inherit_id" ref="product.product_template_only_form_view"/>
+    <field name="arch" type="xml">
+        <!-- Add fields to an existing group -->
+        <xpath expr="//page[@name='general_information']" position="after">
+            <page string="Medicine Info">
+                   <group>
+                       <group string="General Info">
+                            <field name="active_ingredient_ids" widget="many2many_tags"/>
+                            <field name="consuming_way"/>
+                            <field name="medicine_for_ids" widget="many2many_tags"/>
+                            <field name="is_controlled"/>
+                            <field name="is_prescription_only"/>
+                        </group>
+                        <group string="Specific Info">
+                            <field name="strength"/>
+                            <field name="uom"/>
+                            <field name="tape"/>
+                            <field name="bills"/>
+                            <field name="manufacturer"/>
+                        </group>
+                   </group>
+            </page>
+        </xpath>
+        <xpath expr="//header" position="inside">
+                <button name="action_view_substitutes" type="object" class="btn-primary" icon="fa-exchange">
+                    Substitutes
+                </button>
+        </xpath>
+    </field>
+    </record>
+    <record id="product_template_view_type_view_inherit" model="ir.ui.view">
+        <field name="name">product.template.view_type.view.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_search_view"/>
+        <field name="arch" type="xml">
+             <xpath expr="//field[@name='name']" position="after">
+                <field name="active_ingredient_ids" string="Active Ingredient"/>
+             </xpath>
+
+            <!-- 2. One-click filters -->
+            <xpath expr="//filter[@name='filter_to_sell']" position="after">
+                <separator/>
+                <filter name="filter_prescription_only"
+                        string="Prescription Only"
+                        domain="[('is_prescription_only', '=', True)]"/>
+                <filter name="filter_controlled"
+                        string="Controlled Drugs"
+                        domain="[('is_controlled', '=', True)]"/>
+                <filter name="filter_otc"
+                        string="Over the Counter"
+                        domain="[('is_prescription_only', '=', False)]"/>
+            </xpath>
+
+            <!-- 3. Group by -->
+            <xpath expr="//group" position="inside">
+                <filter name="group_by_ingredient" string="Active Ingredient"
+                        context="{'group_by': 'active_ingredient_ids'}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

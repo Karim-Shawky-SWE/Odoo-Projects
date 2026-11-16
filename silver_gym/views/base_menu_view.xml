@@ -1,0 +1,11 @@
+<odoo>
+    <menuitem id="subscription_base_menu"
+              name="Subscription"
+              web_icon="silver_gym,static/description/icon.png"/>
+    <menuitem id="subscription_plans_menu"
+          name="Subscription Plans"
+          parent="subscription_base_menu"/>
+    <menuitem id="subscribing_menu"
+          name="Subscribing"
+          parent="subscription_base_menu"/>
+</odoo>

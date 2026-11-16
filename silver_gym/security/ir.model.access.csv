@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+membership_plan_access,membership_plan_access,model_membership_plan,,1,1,1,1
+subscription_access,subscription_access,model_subscription,,1,1,1,1
+gym_attendance_access,gym_attendance_access,model_gym_attendance_created,,1,1,1,1
+check_in_wizard_access,check_in_wizard_access,model_check_in_wizard,,1,1,1,1

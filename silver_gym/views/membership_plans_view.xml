@@ -1,0 +1,65 @@
+<odoo>
+    <record id="membership_plans_view_list" model="ir.ui.view">
+        <field name="name">membership.plans.view.list</field>
+        <field name="model">membership.plan</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="membership_plan_type"/>
+                <field name="name" />
+                <field name="duration" />
+                <field name="price" />
+                <field name="private_sessions" />
+                <field name="spa_sessions" required='membership_plan_type == "bundle"'/>
+                <field name="inbody" required='membership_plan_type == "bundle"'/>
+            </list>
+        </field>
+    </record>
+
+    <record id="membership_plans_view_view_form" model="ir.ui.view">
+        <field name="name">membership.plans.view.view.form</field>
+        <field name="model">membership.plan</field>
+        <field name="arch" type="xml">
+            <form string="Form Title">
+                <sheet>
+                    <div class="oe_title">
+                        <h6>Don't forget to add the membership type to the name</h6>
+                        <h3>
+                            <field name="membership_plan_type" required="1"/>
+                        </h3>
+                    </div>
+                    <div>
+                        <h1>
+                            <field name="name" required="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="duration" required="1"/>
+                            <field name="private_sessions" required='membership_plan_type in ("private", "bundle")'/>
+                            <field name="spa_sessions" invisible="membership_plan_type == 'private'"/>
+                            <field name="freeze_days" invisible="membership_plan_type == 'private'"/>
+                        </group>
+                        <group>
+                            <field name="price" required="1"/>
+                            <field name="notes"/>
+                        </group>
+                    </group>
+<!--                    <notebook>-->
+<!--                        <field name="line_ids">-->
+<!--                            <field name="line_field1"/>-->
+<!--                            <field name="line_field2"/>-->
+<!--                        </field>-->
+<!--                    </notebook>-->
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="membership_plans_view_action" model="ir.actions.act_window">
+        <field name="name">Membership Plans View</field>
+        <field name="res_model">membership.plan</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="membership_plans_view_list"/>
+    </record>
+    <menuitem id="membership_plans_menu" name="Membership Plans " parent="subscription_plans_menu" action="membership_plans_view_action"/>
+</odoo>

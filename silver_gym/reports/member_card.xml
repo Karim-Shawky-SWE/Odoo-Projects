@@ -1,0 +1,27 @@
+<odoo>
+    <record id="action_report_member_card" model="ir.actions.report">
+        <field name="name">Member Card</field>
+        <field name="model">res.partner</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">silver_gym.report_member_card</field>
+        <field name="report_file">silver_gym.report_member_card</field>
+        <field name="paperformat_id" ref="paperformat_gym_card"/>
+        <field name="binding_model_id" ref="base.model_res_partner"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_member_card">
+        <t t-call="web.basic_layout">
+            <t t-foreach="docs" t-as="o">
+                <div class="page" style="page-break-after: always; text-align: center;">
+                    <h4>Silver Gym</h4>
+                    <div><t t-out="o.name"/></div>
+                    <img t-if="o.barcode"
+                         t-att-src="'/report/barcode/?barcode_type=Code128&amp;value=%s&amp;width=600&amp;height=120' % o.barcode"
+                         style="width: 70mm; height: 15mm;"/>
+                    <div><t t-out="o.barcode"/></div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

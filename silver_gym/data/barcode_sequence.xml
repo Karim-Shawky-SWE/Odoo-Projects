@@ -1,0 +1,10 @@
+<odoo>
+    <data noupdate="1">
+        <record id="seq_gym_member_barcode" model="ir.sequence">
+            <field name="name">Gym Member Barcode</field>
+            <field name="code">gym.member.barcode</field>
+            <field name="prefix">SG</field>
+            <field name="padding">6</field>
+        </record>
+    </data>
+</odoo>

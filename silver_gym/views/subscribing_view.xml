@@ -1,0 +1,115 @@
+<odoo>
+    <record id="subscribing_view_list" model="ir.ui.view">
+        <field name="name">subscribing.list</field>
+        <field name="model">subscription</field>
+        <field name="arch" type="xml">
+            <list decoration-danger="state == 'expired'" decoration-warning="state == 'expire_soon'" decoration-bf="state == 'expired'" decoration-success="state == 'active'">
+                <field name="partner_id"/>
+                <field name="membership_plan_id" />
+                <field name="end_date"/>
+                <field name="trainer_id"/>
+                <field name="state"/>
+                <field name="is_freeze"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="subscribing_view_view_form" model="ir.ui.view">
+        <field name="name">subscribing.form</field>
+        <field name="model">subscription</field>
+        <field name="arch" type="xml">
+            <form string="Form Title">
+                <sheet>
+                    <widget name="web_ribbon" title="Expired" bg_color="text-bg-danger" invisible="state != 'expired'"/>
+                    <widget name="web_ribbon" title="Freezed" bg_color="text-bg-info" invisible="is_freeze == False"/>
+                    <field name="state" widget="statusbar"/>
+                    <header>
+                        <button name="action_freeze" type="object" string="Freeze" invisible="state == 'expired' or not is_freeze" class="btn-primary"/>
+                        <button name="cancel_freeze" type="object" string="Cancel Freeze" invisible="state == 'expired' or is_freeze == False" class="btn-secondary"/>
+                        <button name="confirm_subscription" type="object" string="Confirm Subscription" invisible="is_confirmed == True or state == 'expired'" />
+                    </header>
+                    <div class="oe_title">
+                        <h1>
+                            <label for="partner_id" string="Client Name"/>
+                            <field name="partner_id" required="1" readonly="is_confirmed"/>
+                        </h1>
+                        <h3>
+                            <label for="membership_plan_id" string="Membership Plan"/>
+                            <field name="membership_plan_id" required="1" readonly="is_confirmed"/>
+                        </h3>
+                    </div>
+                    <group>
+                        <group string="General Info">
+                            <field name="duration"/>
+                            <field name="start_date" required="1"/>
+                            <field name="end_date"/>
+                            <field name="total_private_sessions"/>
+                            <field name="remaining_spa_sessions"/>
+                            <field name="freeze_days"/>
+                            <field name="inbody"/>
+                            <field name="quantity" required="1"/>
+                            <field name="price"/>
+                        </group>
+                        <group string="Private Details">
+                            <field name="is_private" />
+                            <field name="private_plan_id" invisible="is_private != True" required="is_private"/>
+                            <field name="private_plan_price" invisible="is_private != True"/>
+                            <field name="total_price"/>
+                            <field name="trainer_id" invisible="total_private_sessions == 0" required="is_private"/>
+                        </group>
+                        <group string="Freeze Details">
+                            <field name="is_freeze"/>
+                            <field name="remaining_freeze_days"/>
+                            <field name="days_to_freeze" required="is_freeze"/>
+                            <field name="frozen_days"/>
+                            <field name="freeze_start_date" required="is_freeze"/>
+                            <field name="freeze_end_date"/>
+                        </group>
+                        <group string="Attendance">
+                            <field name="attendance_counter"/>
+                            <field name="last_check_in"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="ir_cron_check_subscription_state" model="ir.cron">
+        <field name="name">Check Subscription States</field>
+        <field name="model_id" ref="model_subscription"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_check_subscription_state()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record id="ir_cron_check_subscription_state" model="ir.cron">
+        <field name="name">Check Freeze Ends</field>
+        <field name="model_id" ref="model_subscription"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_check_is_freeze()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">hours</field>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record id="ir_cron_subscription_expiry_reminder" model="ir.cron">
+        <field name="name">Subscription: WhatsApp expiry reminder (7 days)</field>
+        <field name="model_id" ref="model_subscription"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_send_expiry_reminders()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="active">True</field>
+    </record>
+
+    <record id="subscribing_view_action" model="ir.actions.act_window">
+        <field name="name">subscribing View</field>
+        <field name="res_model">subscription</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="subscribing_view_list"/>
+    </record>
+    <menuitem id="subscribing_menu" name="Subscribing" parent="subscription_base_menu" action="subscribing_view_action"/>
+</odoo>
