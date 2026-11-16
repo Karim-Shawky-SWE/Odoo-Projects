@@ -1,2 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-active_ingredient_access,active_ingredient_access,model_active_ingredient,,1,1,1,1
+estate_property_access,estate_property_access,model_estate_property,,1,1,1,1
+estate_property_type_access,estate_property_type_access,model_estate_property_type,,1,1,1,1
+estate_property_feature_access,estate_property_feature_access,model_estate_property_feature,,1,1,1,1
+estate_property_image_access,estate_property_image_access,model_estate_property_image,,1,1,1,1

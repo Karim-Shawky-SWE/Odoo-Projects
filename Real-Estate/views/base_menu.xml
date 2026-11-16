@@ -1,0 +1,10 @@
+<odoo>
+    <menuitem id="Real_Estate_menu_root"
+              name="Real-Estate" sequence="7"/>
+    <menuitem id="Real_Estate_menu"
+              name="Properties"
+              parent="Real_Estate_menu_root" sequence="33"/>
+    <menuitem id="Real_Estate_property_type_menu"
+              name="Property types"
+              parent="Real_Estate_menu_root" sequence="34"/>
+</odoo>
