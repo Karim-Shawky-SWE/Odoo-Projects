@@ -3,3 +3,5 @@ estate_property_access,estate_property_access,model_estate_property,,1,1,1,1
 estate_property_type_access,estate_property_type_access,model_estate_property_type,,1,1,1,1
 estate_property_feature_access,estate_property_feature_access,model_estate_property_feature,,1,1,1,1
 estate_property_image_access,estate_property_image_access,model_estate_property_image,,1,1,1,1
+estate_property_image_access,estate_property_image_access,model_estate_property_image,,1,1,1,1
+estate_property_offer_access,estate_property_offer_access,model_estate_property_offer,,1,1,1,1

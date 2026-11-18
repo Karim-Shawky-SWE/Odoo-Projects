@@ -5,6 +5,9 @@
               name="Properties"
               parent="Real_Estate_menu_root" sequence="33"/>
     <menuitem id="Real_Estate_property_type_menu"
-              name="Property types"
+              name="Property Types"
               parent="Real_Estate_menu_root" sequence="34"/>
+    <menuitem id="Real_Estate_property_offer_menu"
+              name="Property Offers"
+              parent="Real_Estate_menu_root" sequence="35"/>
 </odoo>

@@ -23,33 +23,81 @@
                 <sheet>
                     <div class="oe_title">
                         <h1>
-                            <field name="name"/>
+                            <label for="name" string="Property Name"/>
+                            <field name="name" placeholder="Property 1"/>
                         </h1>
                     </div>
-                    <group>
-                        <group string="General Information">
-                            <field name="owner_id"/>
-                            <field name="salesperson_id"/>
-                            <field name="company_id"/>
-                            <field name="description"/>
-                            <field name="is_available"/>
-                        </group>
-                        <group string="Location">
-                            <field name="address"/>
-                            <field name="postcode"/>
-                        </group>
-                        <group string="Property Details">
-                            <field name="property_type_id"/>
-                            <field name="bedrooms"/>
-                            <field name="bathrooms"/>
-                            <field name="living_area"/>
-                            <field name="is_garden"/>
-                            <field name="garden_area"/>
-                        </group>
-                        <group string="Financial Information">
-                            <field name="expected_price"/>
-                        </group>
-                    </group>
+                    <notebook>
+                        <page string="General Information">
+                            <group string="General Information">
+                                <field name="owner_id"/>
+                                <field name="owner_phone"/>
+                                <field name="salesperson_id"/>
+                                <field name="company_id"/>
+                                <field name="description"/>
+                                <field name="is_available"/>
+                            </group>
+                            <group string="Location">
+                                <field name="address"/>
+                                <field name="postcode"/>
+                            </group>
+                            <group string="Property Details">
+                                <field name="property_type_id"/>
+                                <field name="property_type_name"/>
+                                <field name="bedrooms"/>
+                                <field name="bathrooms"/>
+                                <field name="living_area"/>
+                                <field name="is_garden"/>
+                                <field name="garden_area" invisible="not is_garden"/>
+                            </group>
+                            <group string="Financial Information">
+                                <field name="expected_price"/>
+                                <field name="total_area"/>
+                                <field name="best_offer"/>
+                                <field name="offer_count"/>
+                            </group>
+                        </page>
+                        <page string="Features">
+                            <group string="Features">
+                                <field name="feature_ids" string="Features" widget="many2many_tags" placeholder="tags.."/>
+                            </group>
+                        </page>
+                        <page string="Images">
+                            <group string="Images">
+                                <field name="image_ids">
+                                    <kanban default_order="sequence asc">
+                                        <templates>
+                                            <t t-name="card">
+                                                <div class="oe_kanban_global_click rounded">
+                                                    <div class="text-center bg-light rounded overflow-hidden">
+                                                        <field name="image"
+                                                               widget="image"
+                                                               class="w-100"
+                                                               options="{'size': [300, 300]}"/>
+                                                    </div>
+
+                                                    <div class="p-3">
+                                                        <div class="d-flex justify-content-between align-items-start mb-2">
+                                                            <h5 class="fw-bold mb-0 text-truncate">
+                                                                <field name="name"/>
+                                                            </h5>
+                                                            <span class="badge text-bg-primary ms-2">
+                                                                <field name="sequence"/>
+                                                            </span>
+                                                        </div>
+
+                                                        <div class="text-muted small text-truncate">
+                                                            <field name="description"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </templates>
+                                    </kanban>
+                                </field>
+                            </group>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>

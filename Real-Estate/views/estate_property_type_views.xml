@@ -21,7 +21,8 @@
                 <sheet>
                     <div class="oe_title">
                         <h1>
-                            <field name="name"/>
+                            <label for="name" string="Property Type"/>
+                            <field name="name" placeholder="Flat..."/>
                         </h1>
                     </div>
                     <group>
@@ -38,5 +39,5 @@
         <field name="res_model">estate.property.type</field>
         <field name="view_mode">list,form</field>
     </record>
-    <menuitem id="estate_property_type_view" name="Estate Property Type" parent="Real_Estate_property_type_menu" action="estate_property_type_action" sequence="19"/>
+    <menuitem id="estate_property_type_view" name="Property Type" parent="Real_Estate_property_type_menu" action="estate_property_type_action" sequence="19"/>
 </odoo>

@@ -1,0 +1,64 @@
+<odoo>
+    <record id="estate_property_offer_view_list" model="ir.ui.view">
+        <field name="name">estate.property.offer.view.list</field>
+        <field name="model">estate.property.offer</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="property_id"/>
+                <field name="price"/>
+                <field name="validity"/>
+                <field name="date_deadline"/>
+            </list>
+        </field>
+    </record>
+    <record id="estate_property_offer_view_form" model="ir.ui.view">
+        <field name="name">estate.property.offer.view.form</field>
+        <field name="model">estate.property.offer</field>
+        <field name="arch" type="xml">
+            <form string="Offer Form">
+                <header>
+                    <field name="status" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="General Info.">
+                            <field name="partner_id"/>
+                            <field name="property_id"/>
+                        </group>
+                        <group string="Financial Details">
+                            <field name="price"/>
+                            <field name="currency_id"/>
+                        </group>
+                        <group string="Due Details">
+                            <field name="validity"/>
+                            <field name="date_deadline"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="estate_property_offer_view_search" model="ir.ui.view">
+        <field name="name">estate.property.offer.view.search</field>
+        <field name="model">estate.property.offer</field>
+        <field name="arch" type="xml">
+            <search string="Search Title">
+                <field name="name" string="Name" filter_domain="[('name','ilike',self)]"/>
+                <field name="property_id" string="Property ID"/>
+            </search>
+        </field>
+    </record>
+    <record id="estate_property_offer_action" model="ir.actions.act_window">
+        <field name="name">Estate Property Offer</field>
+        <field name="res_model">estate.property.offer</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <menuitem id="estate_property_offer_view" name="Offers" parent="Real_Estate_property_offer_menu" action="estate_property_offer_action" sequence="30"/>
+</odoo>

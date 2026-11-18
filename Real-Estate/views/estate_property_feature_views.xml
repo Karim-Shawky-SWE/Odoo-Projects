@@ -1,0 +1,39 @@
+<odoo>
+    <record id="estate_property_feature_view_form" model="ir.ui.view">
+        <field name="name">estate.property.feature.view.form</field>
+        <field name="model">estate.property.feature</field>
+        <field name="arch" type="xml">
+            <form string="Form Title">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <label for="name" string="Feature name"/>
+                            <field name="name" placeholder="Pool..."/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="description"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="estate_property_feature_view_search" model="ir.ui.view">
+        <field name="name">estate.property.feature.view.search</field>
+        <field name="model">estate.property.feature</field>
+        <field name="arch" type="xml">
+            <search string="Search Title">
+                <field name="name" string="Name" filter_domain="[('name','ilike',self)]"/>
+            </search>
+        </field>
+    </record>
+    <record id="estate_property_feature_action" model="ir.actions.act_window">
+        <field name="name">Estate Property Feature</field>
+        <field name="res_model">estate.property.feature</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <menuitem id="estate_property_feature_view" name="Property Features" parent="Real_Estate_property_type_menu" action="estate_property_feature_action" sequence="40"/>
+</odoo>
